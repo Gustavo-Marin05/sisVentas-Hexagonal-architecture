@@ -35,10 +35,10 @@ export const registerUser = async (userData) => {
 
 export const loginUser = async (username, password) => {
   const userFound = await User.findOne({ username });
-  if (!userFound) return( ["no existe el nombre de usuario"]);
+  if (!userFound) return ["no existe el nombre de usuario"];
 
   const isMach = await bcrypt.compare(password, userFound.password);
-  if (!isMach) return (["la contraceña es incorrecta"]);
+  if (!isMach) return ["la contraceña es incorrecta"];
 
   const token = await createaccestoken({ id: userFound._id });
 
@@ -52,6 +52,33 @@ export const loginUser = async (username, password) => {
   };
 };
 
-export const profileUser= async ()=>{
+export const getProfile = async (userId) => {
+  try {
+    const userFound = await User.findById(userId);
+    if (!userFound) return (["usuario no encontrado"]);
+    return {
+      id: userFound._id,
+      fullname: userFound.fullname,
+      username: userFound.username,
+      createdAt: userFound.createdAt,
+      updatedAt: userFound.updatedAt,
+      
+    };
+  } catch (error) {
+    throw new Error("Error al obtener el perfil del usuario");
+  }
+};
 
+
+
+export const deleteProfile =async(userId)=>{
+
+  try {
+    const userdelete=await User.findByIdAndDelete(userId);
+    if(userdelete) return (['usuario borrado exitosamente'])
+
+    
+  } catch (error) {
+    throw new Error("Error al obtener el perfil del usuario");
+  }
 }
