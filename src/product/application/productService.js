@@ -1,22 +1,27 @@
-import Product from "../domain/Product.js";
-//import { product } from "../infrastructure/product.controller.js";
 
+import Product from "../domain/Product.js";
+import {findCategorybyId} from "../../category/application/categoryService.js";
 export const createProduct = async (productData, user) => {
-  const { nameProduct, amount, price } = productData;
+  const { nameProduct, amount, price ,category} = productData;
   try {
+
+
+    const categoryFound =await findCategorybyId(category);
+    if (!categoryFound) { throw new Error("Categoría no encontrada");}
+
     const newProduct = new Product({
       nameProduct,
       amount,
       price,
+      category:categoryFound._id,
       user: user.id,
     });
 
     const productSave = await newProduct.save();
-    const populateProduct = await Product.findById(productSave._id).populate(
-      "user"
-    );
+    const populateProduct = await Product.findById(productSave._id).populate("user").populate("category");
+
+    console.log(populateProduct);
     return populateProduct;
-    console.log("entro correctamente");
   } catch (error) {
     throw new Error("Error al crear el producto");
   }

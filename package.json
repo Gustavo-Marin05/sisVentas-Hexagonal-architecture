@@ -7,9 +7,9 @@
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gustavo Marin Masti",
   "license": "ISC",
-  "description": "",
+  "description": "programa sistema de ventas",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",

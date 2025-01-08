@@ -4,9 +4,9 @@ import { createProduct,getProducts,getProduct ,updateProduct,DeletebyId} from ".
 export const productSave = async (req, res) => {
     try {
         const product=await createProduct(req.body,req.user);
-        res.json(product);
+        res.status(200).json(product);
     } catch (error) {
-        res.status(400).json(["error al crear el producto producto"]);
+        res.status(400).json(["error en create product"]);
     }
 
 };
