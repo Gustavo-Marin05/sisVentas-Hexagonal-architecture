@@ -1,6 +1,6 @@
 
 import Product from "../domain/Product.js";
-import {findCategorybyId} from "../../category/application/categoryService.js";
+import {findCategorybyId} from "../../category/application/categoryService.js";// se busca por el id de la categoria
 export const createProduct = async (productData, user) => {
   const { nameProduct, amount, price ,category} = productData;
   try {
@@ -76,3 +76,30 @@ export const DeletebyId = async (productid) => {
     throw new Error("Error al editar el producto");
   }
 };
+
+
+//encontrar el producto por el id
+export const FindProductById=async(productId)=>{
+try {
+  return Product.findById(productId);
+  
+} catch (error) {
+  throw new Error("Error al encontrar el producto");
+}
+
+}
+
+//encontrar el producto por el nombre
+
+export const FindProductByName= async(nameProduct)=>{
+  try {
+    const  product =await Product.findOne({name:nameProduct});
+    if(!product) {
+      throw new Error("Producto  no encontrado");
+    }
+  
+  } catch (error) {
+    throw new Error("Error al encontrar el nombre del producto");
+
+  }
+}

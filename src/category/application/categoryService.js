@@ -65,7 +65,7 @@ export const delteById = async (categoryId) => {
   }
 };
 
-//encontrar una categoria
+//encontrar una categoria por el id
 
 export const findCategorybyId = async (categoryId) => {
   try {
