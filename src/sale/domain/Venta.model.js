@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-const ventaSchema = mongoose.Schema({
+const SaleSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -33,4 +33,4 @@ const ventaSchema = mongoose.Schema({
   },
 });
 
-export default mongoose.model("Venta", ventaSchema);
+export default mongoose.model("Sale", SaleSchema);

@@ -1,6 +1,6 @@
 import express from "express";
 import { FindProductById } from "../../product/application/productService.js";
-import Venta from "../domain/Venta.model.js";
+import Sale from "../domain/Venta.model.js";
 
 export const createVenta = async (ventaData, user) => {
   const { products } = ventaData;
@@ -44,7 +44,7 @@ export const createVenta = async (ventaData, user) => {
 //obtenemos todas la ventas del usuario
 export const getAllVentas = async (user) => {
   try {
-    const ventaFound = await Venta.find({ user: user.id });
+    const ventaFound = await Sale.find({ user: user.id });
     return ventaFound;
   } catch (error) {
     throw new Error("Error al obtener las ventas");
@@ -57,7 +57,7 @@ export const getAllVentas = async (user) => {
 export const getVentaById=async (ventaId,user)=>{
 
     try {
-        const ventaFound=await Venta.findById({_id:ventaId,user:user.id});
+        const ventaFound=await Sale.findById({_id:ventaId,user:user.id});
         return ventaFound;
     } catch (error) {
       throw new Error("Error al obtener la venta seleccionanda");

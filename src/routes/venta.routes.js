@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {ventaSave,getVentas,getVenta} from "../venta/infrastructure/venta.controller.js";
+import {ventaSave,getVentas,getVenta} from "../sale/infrastructure/venta.controller.js";
 import { authRequired } from "../middleware/validateToken.js";
 
 

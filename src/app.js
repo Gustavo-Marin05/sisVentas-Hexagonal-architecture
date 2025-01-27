@@ -7,6 +7,7 @@ import categoryRoutes from './routes/category.routes.js';
 import ventaRoutes from './routes/venta.routes.js';
 
 const app = express();
+
 app.use(express.json());
 app.use(cookieParser());
 //app.use(bodyParser.urlencoded({ extended: true}))
