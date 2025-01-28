@@ -1,6 +1,7 @@
 import express from "express";
 import { FindProductById } from "../../product/application/productService.js";
 import Sale from "../domain/Venta.model.js";
+import { createdInvoice } from "../../invoice/application/invoiceService.js";
 
 export const createVenta = async (ventaData, user) => {
   const { products } = ventaData;
@@ -38,7 +39,22 @@ export const createVenta = async (ventaData, user) => {
 
   const ventaSave = await venta.save();
 
-  return ventaSave;
+  //se crea y se imprime la factura despues de guardar la venta
+
+  const invoiceData={
+    user:user.id,
+    clientname:clientname||'anonymus',
+    products:productList,
+    description:`factura para la venta ${ventaSave._id}`,
+    status:'unpaid'
+  }
+
+  const invoice= await createdInvoice(invoiceData,user);
+
+
+
+
+  return {venta: ventaSave, factura:invoice};
 };
 
 //obtenemos todas la ventas del usuario
